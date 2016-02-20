@@ -4,7 +4,7 @@ We want our outermost component to be the one with state.
 
 Here we have a top-level component called "GrandparentFlow" (in index.ios.js)
 
-In its constructor it connects to our kitten API and loads an array of cats into its state. It also has a "removeKitty" function that we want to get called when someone clicks on a cat picture to mutate the state.
+In its constructor it connects to our kitten API and loads an array of cats into its state. It also has a "removeKitty" function that we want to get called when someone clicks on a cat picture. It should mutate the state - i.e. remove the cat.
 
 That function looks like this:
 ```
