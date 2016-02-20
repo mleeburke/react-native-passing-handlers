@@ -11,42 +11,39 @@ import React, {
   View
 } from 'react-native';
 
+import CatListView from './src/cat-list-view.js';
+const styles= require('./src/styles');
+
 class GrandparentFlow extends Component {
+
+  // This is the component that keeps state
+  constructor() {
+    super()
+    this.state = {cats: []}
+    fetch('https://stark-harbor-5038.herokuapp.com/cats')
+    .then((response) => response.json())
+    .then((jsonArray) => this.setState({cats: jsonArray}))
+  }
+
+  removeKitty(targetCat) {
+    // In the real app we would send a delete request to the API here
+    // For now we'll just remove the kitty locally
+    console.log('remove kitty called');
+    var remainingCats = this.state.cats.filter((cat) => cat.id !== targetCat.id);
+    this.setState({cats: remainingCats});
+  }
+
+  // We pass the click handler to the child component with "this" bound to this component
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <CatListView
+          cats={this.state.cats}
+          clickHandler={this.removeKitty.bind(this)}
+        />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('GrandparentFlow', () => GrandparentFlow);
