@@ -28,7 +28,7 @@ class GrandparentFlow extends Component {
   removeKitty(targetCat) {
     // In the real app we would send a delete request to the API here
     // For now we'll just remove the kitty locally
-    console.log('remove kitty called');
+    console.log('remove kitty called for ', targetCat);
     var remainingCats = this.state.cats.filter((cat) => cat.id !== targetCat.id);
     this.setState({cats: remainingCats});
   }
